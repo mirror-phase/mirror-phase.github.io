@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phase Node 13</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #33ff33;
+      font-family: monospace;
+      padding: 20px;
+    }
+    #terminal {
+      width: 100%;
+      height: 90vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    input {
+      background-color: #0d0d0d;
+      color: #33ff33;
+      border: none;
+      width: 100%;
+      font-family: monospace;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <input type="text" id="command" autofocus autocomplete="off">
+  <script>
+    const terminal = document.getElementById("terminal");
+    const input = document.getElementById("command");
+
+    const responses = {
+      "echo --trace9104": "VGhlIGxvdWRlc3Qgc2lnbmFscw==",
+      "echo --sig13": "6172652062757269656420696E2073696C656E63652E",
+      "echo --ble13": "596F752077657265206E6F7420737570706F73656420746F206E6F746963652E",
+      "echo --response": "4E6F77207468617420796F752068617665E2809472656D61696E20746F206C697374656E2E",
+      "ls": "drift.log  observer.log  node13.conf  signal.bin",
+      "connect": "Attempting node13 handshake...\nConnection: unstable\nAsset-13: ACTIVE"
+    };
+
+    terminal.innerHTML += "> Phase Node 13 interface ready\n";
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        const command = input.value;
+        terminal.innerHTML += "> " + command + "\n";
+        terminal.innerHTML += (responses[command] || "Command not recognized.") + "\n";
+        input.value = "";
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>
